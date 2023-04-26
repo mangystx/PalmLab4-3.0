@@ -83,10 +83,12 @@ namespace PalmLab4
         }
         public static int[][] ReplaceStartArray_Block2(int[][] arrayStart, int indexMaxVal)
         {
-            (arrayStart[indexMaxVal - 1], arrayStart[arrayStart.GetLength(0) - 1]) = (arrayStart[arrayStart.GetLength(0) - 1], arrayStart[indexMaxVal - 1]);
+            for (int i = arrayStart.Length - 1; i > indexMaxVal; i--)
+            {
+                (arrayStart[i], arrayStart[i - 1]) = (arrayStart[i - 1], arrayStart[i]);
+            }
             return arrayStart;
         }
-
         public static int FindingMaxVal(int[][] arrayStart)
         {
             int elementMax = Int32.MinValue;
@@ -95,7 +97,7 @@ namespace PalmLab4
             {
                 for (int j = 0; j < arrayStart[i].Length; j++)
                 {
-                    if (elementMax < arrayStart[i][j])
+                    if (elementMax <= arrayStart[i][j])
                     {
                         elementMax = arrayStart[i][j];
                         indexMaxVal = i;
