@@ -4,37 +4,32 @@
     {
         public static int[] VanVol1(int[] arr)
         {
-            int max = int.MinValue;
-            int min = int.MaxValue;
-            int maxIndex = -1;
-            int minIndex = -1;
+            int maxIndex = 0, minIndex = 0;
 
             for (int i = 0; i < arr.Length; i++)
             {
-                if (arr[i] > max)
-                {
-                    max = arr[i];
+                if (arr[i] > arr[maxIndex])
                     maxIndex = i;
-                }
 
-                if (arr[i] < min)
-                {
-                    min = arr[i];
+                if (arr[i] <= arr[minIndex])
                     minIndex = i;
+            }
+
+            int startIndex = maxIndex < minIndex ? maxIndex : minIndex;
+            int endIndex = maxIndex > minIndex ? maxIndex : minIndex;
+
+            int[] newArr = new int[arr.Length - (endIndex - startIndex + 1)];
+            int j = 0;
+            for (int i = 0; i < arr.Length; i++)
+            {
+                if (i < startIndex || i > endIndex)
+                {
+                    newArr[j] = arr[i];
+                    j++;
                 }
             }
-
-            if (maxIndex < minIndex)
-            {
-                int temp = maxIndex;
-                maxIndex = minIndex;
-                minIndex = temp;
-            }
-
-            Array.Resize(ref arr, arr.Length - (maxIndex - minIndex + 1));
-
-            Console.WriteLine(string.Join(" ", arr));
-
+            arr = newArr;
+            Console.WriteLine(string.Join(",", arr));
             return arr;
         }
         public static int[][] VanVol2(int[][] jaggedArray)
