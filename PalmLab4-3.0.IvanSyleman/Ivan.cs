@@ -63,7 +63,7 @@ namespace PalmLab4
         {
             for (int i = mass.Length - 1; i > index; i--)
             {
-                Array.Resize(ref mass[i], mass[i - 1].Length);
+                //Array.Resize(ref mass[i], mass[i - 1].Length);
                 (mass[i], mass[i - 1]) = (mass[i - 1], mass[i]);
             }
         }
