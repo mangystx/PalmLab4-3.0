@@ -53,7 +53,7 @@ namespace PalmLab4
         {
             Array.Resize(ref mass, mass.Length + 1);
             mass[mass.Length - 1] = new int[mass[mass.Length - 2].Length];
-            BonusRow_Index(out int index);
+            BonusRow_Index(out int index, mass.Length - 1);
             Push_Down_Roows(ref mass, index);
             Add_Row(ref mass, index);
             Console.WriteLine("\nРезультуючий масив");
@@ -63,14 +63,18 @@ namespace PalmLab4
         {
             for (int i = mass.Length - 1; i > index; i--)
             {
+                Array.Resize(ref mass[i], mass[i - 1].Length);
                 (mass[i], mass[i - 1]) = (mass[i - 1], mass[i]);
-                Array.Resize(ref mass[i - 1], mass[i - 2].Length);
             }
         }
-        public static void BonusRow_Index(out int index)
+        public static void BonusRow_Index(out int index, int length)
         {
-            Console.WriteLine("\nВи додаєте рядок з номером");
-            index = int.Parse(Console.ReadLine()) - 1;
+            Console.WriteLine($"\nКiлькiсть рядкiв рiвна |{length}|");
+            do
+            {
+                Console.WriteLine("\nВи додаєте рядок з номером");
+                index = int.Parse(Console.ReadLine()) - 1;
+            } while (index > length || index < 0);
         }
         public static void Add_Row(ref int[][] mass, int index)
         {
