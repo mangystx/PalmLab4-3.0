@@ -4,71 +4,71 @@ namespace PalmLab4
 {
     public class Lexa
     {
-        public static int[] FindCountNegNum(int[] arrayStartNumbers)
+        public static int[] FindCountNegNum(int[] arrayStartNum)
         {
-            int counerNegativeNumbers = 0;
-            int[] indexesOfAllNegativeArrayElements = new int[0];
-            for (int i = 0; i < arrayStartNumbers.Length; i++)
+            int countNegNum = 0;
+            int[] indexAllNegNum = new int[0];
+            for (int i = 0; i < arrayStartNum.Length; i++)
             {
-                if (arrayStartNumbers[i] < 0)
+                if (arrayStartNum[i] < 0)
                 {
-                    counerNegativeNumbers++;
+                    countNegNum++;
                 }
             }
-            if (counerNegativeNumbers != 0)
+            if (countNegNum != 0)
             {
-                indexesOfAllNegativeArrayElements = FindIndexesNegNum(arrayStartNumbers, counerNegativeNumbers);
+                indexAllNegNum = FindIndexesNegNum(arrayStartNum, countNegNum);
             }
-            return indexesOfAllNegativeArrayElements;
+            return indexAllNegNum;
         }
-        public static int[] FindIndexesNegNum(int[] arrayStartNumbers, int counerNegativeNumbers)
+        public static int[] FindIndexesNegNum(int[] arrayStartNum, int countNegNum)
         {
-            int[] indexesOfAllNegativeArrayElements = new int[counerNegativeNumbers];
-            for (int i = 0, j = 0; i < arrayStartNumbers.Length; i++)
+            int[] indexAllNegNum = new int[countNegNum];
+            for (int i = 0, j = 0; i < arrayStartNum.Length; i++)
             {
-                if (arrayStartNumbers[i] < 0)
+                if (arrayStartNum[i] < 0)
                 {
-                    indexesOfAllNegativeArrayElements[j] = i;
+                    indexAllNegNum[j] = i;
                     j++;
                 }
             }
-            return indexesOfAllNegativeArrayElements;
+            return indexAllNegNum;
         }
-        public static int[] ResizePrimaryArray(int[] arrayStartNumbers, int[] indexesOfAllNegativeArrayElements)
+        public static int[] ResizePrimaryArray(int[] arrayStartNum, int[] indexAllNegNum)
         {
-            Array.Resize(ref arrayStartNumbers, arrayStartNumbers.Length + indexesOfAllNegativeArrayElements.Length);
-            return arrayStartNumbers;
+            Array.Resize(ref arrayStartNum, arrayStartNum.Length + indexAllNegNum.Length);
+            return arrayStartNum;
         }
-        public static int[] Replace(int[] arrayStartNumbers, int[] indexesOfAllNegativeArrayElements)
+        public static int[] MoveNum(int[] arrayStartNum, int[] indexAllNegNum)
         {
-            for (int i = 1; i < indexesOfAllNegativeArrayElements.Length + 1; i++)
+            for (int i = 1; i < indexAllNegNum.Length + 1; i++)
             {
-                for (int j = arrayStartNumbers.Length - 1; j > indexesOfAllNegativeArrayElements[i - 1] + i; j--)
+                for (int j = arrayStartNum.Length - 1; j > indexAllNegNum[i - 1] + i; j--)
                 {
-                    (arrayStartNumbers[j], arrayStartNumbers[j - 1]) = (arrayStartNumbers[j - 1], arrayStartNumbers[j]);
+                    (arrayStartNum[j], arrayStartNum[j - 1]) = (arrayStartNum[j - 1], arrayStartNum[j]);
                 }
             }
-            return arrayStartNumbers;
+            return arrayStartNum;
         }
-        public static int[] ReplaceZeros(int[] arrayStartNumbers, int[] indexesOfAllNegativeArrayElements)
+        public static int[] ReplaceZeros(int[] arrayStartNum, int[] indexAllNegNum)
         {
-            for (int i = 0; i < indexesOfAllNegativeArrayElements.Length; i++)
+            for (int i = 0; i < indexAllNegNum.Length; i++)
             {
-                arrayStartNumbers[indexesOfAllNegativeArrayElements[i] + i + 1] = Math.Abs(arrayStartNumbers[indexesOfAllNegativeArrayElements[i] + i]);
+                arrayStartNum[indexAllNegNum[i] + i + 1] = Math.Abs(arrayStartNum[indexAllNegNum[i] + i]);
             }
-            return arrayStartNumbers;
+            return arrayStartNum;
         }
-        public static void MainMethodBlock1(int[] arrayStartNumbers)
+        public static void MainMethodBlock1(int[] arrayStartNum)
         {
-            int[] indexesOfAllNegativeArrayElements = FindCountNegNum(arrayStartNumbers);
-            if (indexesOfAllNegativeArrayElements.Length != 0)
+            int[] indexAllNegNum = FindCountNegNum(arrayStartNum);
+            if (indexAllNegNum.Length != 0)
             {
-                arrayStartNumbers = ResizePrimaryArray(arrayStartNumbers, indexesOfAllNegativeArrayElements);
-                arrayStartNumbers = Replace(arrayStartNumbers, indexesOfAllNegativeArrayElements);
-                arrayStartNumbers = ReplaceZeros(arrayStartNumbers, indexesOfAllNegativeArrayElements);
-                for (int i = 0; i < arrayStartNumbers.Length; i++)
+                arrayStartNum = ResizePrimaryArray(arrayStartNum, indexAllNegNum);
+                arrayStartNum = MoveNum(arrayStartNum, indexAllNegNum);
+                arrayStartNum = ReplaceZeros(arrayStartNum, indexAllNegNum);
+                for (int i = 0; i < arrayStartNum.Length; i++)
                 {
-                    Console.Write($"{arrayStartNumbers[i]} ");
+                    Console.Write($"{arrayStartNum[i]} ");
                 }
 
                 Console.WriteLine();
